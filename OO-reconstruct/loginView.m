@@ -11,6 +11,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "httpRequest.h"
 #import "MyMD5.h"
+#import "handleLogResponedData.h"
 @interface loginView()
 {
     UILabel *titleLabel;
@@ -161,7 +162,7 @@
     _useName.text = use;
     _passWord.text = pass;
     //---------------------------//
-
+    //handleLogResponedData *handle = [[handleLogResponedData alloc] init];
 }
 
 #pragma mark
@@ -227,11 +228,24 @@
         AFHTTPRequestOperation *opearation = [[AFHTTPRequestOperation alloc] initWithRequest:URLRequest];
         [opearation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSData *data = [[NSData alloc] initWithData:responseObject];
             //NSLog(@"完成 %@", result);
             __strong __typeof(weakSelf)strongSelf = weakSelf;
             if (result.length < 4) {
-                [[[UIAlertView alloc] initWithTitle:@"Attention" message:@"用户名密码错误" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+                [[[UIAlertView alloc] initWithTitle:@"Attention" message:@"用户名密码错误" delegate:weakSelf cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
                 [strongSelf.activityView stopAnimating];
+            }else{
+                NSError *error;
+                NSDictionary *jsonDic =[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments   error:&error];
+                //NSLog(@"%@",jsonDic);
+                if (![jsonDic objectForKey:@"code"] || ![[jsonDic objectForKey:@"code"] isEqualToString:@"504"]) {
+                    [[[UIAlertView alloc] initWithTitle:@"Attention" message:@"用户名密码错误" delegate:weakSelf cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+                    [strongSelf.activityView stopAnimating];
+                }else{
+                    handleLogResponedData *handle = [[handleLogResponedData alloc] init];
+                    [handle handThelogResponedData:data];
+                    [self removeFromSuperview];
+                }
             }
             [strongSelf.activityView stopAnimating];
 
@@ -240,7 +254,7 @@
         }];
         [opearation start];
     }
-    [self removeFromSuperview];
+    //[self removeFromSuperview];
 }
 
 - (void)chargeIsHasNetWork{

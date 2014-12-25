@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface loginView : UIView<UITextFieldDelegate>
 {
 }
@@ -24,6 +25,7 @@
 
 //net work
 @property (nonatomic, assign)BOOL isExistenceNetwork;
+
 
 //setting uilabel
 - (void)setLabelStyle:(UILabel *)_Label

@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		900A63F11A4AA74800AA3A60 /* FilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 900A63F01A4AA74800AA3A60 /* FilesViewController.m */; };
-		900A63F61A4AA92500AA3A60 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 900A63F51A4AA92500AA3A60 /* AboutViewController.m */; };
-		900A63F91A4AA93600AA3A60 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 900A63F81A4AA93600AA3A60 /* ChatViewController.m */; };
 		900A64211A4AAB3200AA3A60 /* about.png in Resources */ = {isa = PBXBuildFile; fileRef = 900A63FB1A4AAB3200AA3A60 /* about.png */; };
 		900A64221A4AAB3200AA3A60 /* chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 900A63FC1A4AAB3200AA3A60 /* chat.png */; };
 		900A64231A4AAB3200AA3A60 /* chat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 900A63FD1A4AAB3200AA3A60 /* chat@2x.png */; };
@@ -53,6 +50,10 @@
 		902C95191A48FD9500355D7F /* httpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 902C95181A48FD9500355D7F /* httpRequest.m */; };
 		907707FA1A47A7050075CBE3 /* loginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 907707F91A47A7050075CBE3 /* loginView.m */; };
 		907707FE1A47FAED0075CBE3 /* MyMD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 907707FD1A47FAED0075CBE3 /* MyMD5.m */; };
+		909810451A4BE929000479D1 /* handleLogResponedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 909810441A4BE929000479D1 /* handleLogResponedData.m */; };
+		9098104B1A4C1249000479D1 /* FilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9098104A1A4C1249000479D1 /* FilesViewController.m */; };
+		9098104E1A4C13EE000479D1 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9098104D1A4C13EE000479D1 /* AboutViewController.m */; };
+		909810511A4C1406000479D1 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 909810501A4C1406000479D1 /* ChatViewController.m */; };
 		90A56B591A44000D00D0BE74 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A56B581A44000D00D0BE74 /* main.m */; };
 		90A56B5C1A44000D00D0BE74 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A56B5B1A44000D00D0BE74 /* AppDelegate.m */; };
 		90A56B5F1A44000D00D0BE74 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A56B5E1A44000D00D0BE74 /* ViewController.m */; };
@@ -74,12 +75,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		900A63EF1A4AA74800AA3A60 /* FilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilesViewController.h; sourceTree = "<group>"; };
-		900A63F01A4AA74800AA3A60 /* FilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilesViewController.m; sourceTree = "<group>"; };
-		900A63F41A4AA92500AA3A60 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
-		900A63F51A4AA92500AA3A60 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
-		900A63F71A4AA93600AA3A60 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
-		900A63F81A4AA93600AA3A60 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		900A63FB1A4AAB3200AA3A60 /* about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about.png; sourceTree = "<group>"; };
 		900A63FC1A4AAB3200AA3A60 /* chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat.png; sourceTree = "<group>"; };
 		900A63FD1A4AAB3200AA3A60 /* chat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat@2x.png"; sourceTree = "<group>"; };
@@ -128,6 +123,14 @@
 		907707F91A47A7050075CBE3 /* loginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginView.m; sourceTree = "<group>"; };
 		907707FC1A47FAED0075CBE3 /* MyMD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMD5.h; sourceTree = "<group>"; };
 		907707FD1A47FAED0075CBE3 /* MyMD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMD5.m; sourceTree = "<group>"; };
+		909810431A4BE929000479D1 /* handleLogResponedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = handleLogResponedData.h; sourceTree = "<group>"; };
+		909810441A4BE929000479D1 /* handleLogResponedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = handleLogResponedData.m; sourceTree = "<group>"; };
+		909810491A4C1249000479D1 /* FilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilesViewController.h; sourceTree = "<group>"; };
+		9098104A1A4C1249000479D1 /* FilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilesViewController.m; sourceTree = "<group>"; };
+		9098104C1A4C13EE000479D1 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		9098104D1A4C13EE000479D1 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		9098104F1A4C1406000479D1 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		909810501A4C1406000479D1 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		90A56B531A44000D00D0BE74 /* OO-reconstruct.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OO-reconstruct.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A56B571A44000D00D0BE74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90A56B581A44000D00D0BE74 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -169,8 +172,8 @@
 		900A63F21A4AA8FF00AA3A60 /* aboutView */ = {
 			isa = PBXGroup;
 			children = (
-				900A63F41A4AA92500AA3A60 /* AboutViewController.h */,
-				900A63F51A4AA92500AA3A60 /* AboutViewController.m */,
+				9098104C1A4C13EE000479D1 /* AboutViewController.h */,
+				9098104D1A4C13EE000479D1 /* AboutViewController.m */,
 			);
 			name = aboutView;
 			sourceTree = "<group>";
@@ -178,8 +181,8 @@
 		900A63F31A4AA90C00AA3A60 /* chatView */ = {
 			isa = PBXGroup;
 			children = (
-				900A63F71A4AA93600AA3A60 /* ChatViewController.h */,
-				900A63F81A4AA93600AA3A60 /* ChatViewController.m */,
+				9098104F1A4C1406000479D1 /* ChatViewController.h */,
+				909810501A4C1406000479D1 /* ChatViewController.m */,
 			);
 			name = chatView;
 			sourceTree = "<group>";
@@ -252,6 +255,8 @@
 			children = (
 				907707F81A47A7050075CBE3 /* loginView.h */,
 				907707F91A47A7050075CBE3 /* loginView.m */,
+				909810431A4BE929000479D1 /* handleLogResponedData.h */,
+				909810441A4BE929000479D1 /* handleLogResponedData.m */,
 			);
 			name = loginView;
 			sourceTree = "<group>";
@@ -259,8 +264,8 @@
 		902C951B1A49424000355D7F /* fileView */ = {
 			isa = PBXGroup;
 			children = (
-				900A63EF1A4AA74800AA3A60 /* FilesViewController.h */,
-				900A63F01A4AA74800AA3A60 /* FilesViewController.m */,
+				909810491A4C1249000479D1 /* FilesViewController.h */,
+				9098104A1A4C1249000479D1 /* FilesViewController.m */,
 			);
 			name = fileView;
 			sourceTree = "<group>";
@@ -544,16 +549,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				900A63F61A4AA92500AA3A60 /* AboutViewController.m in Sources */,
 				90A56B5F1A44000D00D0BE74 /* ViewController.m in Sources */,
-				900A63F91A4AA93600AA3A60 /* ChatViewController.m in Sources */,
 				907707FE1A47FAED0075CBE3 /* MyMD5.m in Sources */,
-				900A63F11A4AA74800AA3A60 /* FilesViewController.m in Sources */,
+				909810511A4C1406000479D1 /* ChatViewController.m in Sources */,
 				900A644C1A4AB18700AA3A60 /* TabBarController.m in Sources */,
 				90A56B5C1A44000D00D0BE74 /* AppDelegate.m in Sources */,
 				902C95191A48FD9500355D7F /* httpRequest.m in Sources */,
+				9098104E1A4C13EE000479D1 /* AboutViewController.m in Sources */,
 				907707FA1A47A7050075CBE3 /* loginView.m in Sources */,
 				90A56B591A44000D00D0BE74 /* main.m in Sources */,
+				909810451A4BE929000479D1 /* handleLogResponedData.m in Sources */,
+				9098104B1A4C1249000479D1 /* FilesViewController.m in Sources */,
 				902C95161A48FD8000355D7F /* DataStorage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

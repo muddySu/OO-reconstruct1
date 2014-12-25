@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1742376C-252F-45CF-BC82-841E7075B411</string>
+	<key>IDESourceControlProjectName</key>
+	<string>OO-reconstruct</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>470202E8324349914B06E2C82963DCD920C540CB</key>
+		<string>https://github.com/muddySu/OO-reconstruct1.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>OO-reconstruct.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>470202E8324349914B06E2C82963DCD920C540CB</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/muddySu/OO-reconstruct1.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>470202E8324349914B06E2C82963DCD920C540CB</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>470202E8324349914B06E2C82963DCD920C540CB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>OO-reconstruct</string>
+		</dict>
+	</array>
+</dict>
+</plist>
