@@ -1,0 +1,31 @@
+//
+//  PrefixHeader.pch
+//  OO-reconstruct
+//
+//  Created by su on 12/19/14.
+//  Copyright (c) 2014 su. All rights reserved.
+//
+
+#ifndef OO_reconstruct_PrefixHeader_pch
+#define OO_reconstruct_PrefixHeader_pch
+    #define MAS_SHORTHAND
+    #define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
+#define deviceVersion [[[UIDevice currentDevice] systemVersion] floatValue]
+#define Screen_WIDTH [[UIScreen mainScreen] bounds].size.width
+#define Screen_HEIGHT [[UIScreen mainScreen] bounds].size.height
+
+#define LAND_WIDTH ((APPWIDTH > APPHEIGHT) ? (APPWIDTH):(APPHEIGHT))
+#define PORT_WIDTH ((APPWIDTH < APPHEIGHT) ? (APPWIDTH):(APPHEIGHT))
+#define LAND_HEIGTH ((APPWIDTH < APPHEIGHT) ? (APPWIDTH):(APPHEIGHT))
+#define PORT_HEIGTH ((APPWIDTH > APPHEIGHT) ? (APPWIDTH):(APPHEIGHT))
+
+#define IOS_7 ((deviceVersion >= 7.0 && deviceVersion< 8.0) ? (1):(0))
+#define IOS_8 ((deviceVersion >= 8.0 ) ? (1):(0))
+#define RGBCOLOR(r, g, b) [UIColor colorWithRed:r green:g blue:b alpha:1]
+#define screen_orientation [[UIDevice currentDevice] orientation]
+#define orientation_Flag ((screen_orientation == UIDeviceOrientationLandscapeLeft || screen_orientation == UIDeviceOrientationLandscapeRight) ? (0):(1))
+    #import "Masonry.h"
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif
