@@ -33,6 +33,7 @@
 
     self.logView = [[loginView alloc] initWithFrame:CGRectMake(0, 0, Screen_WIDTH, Screen_HEIGHT)];
     [self.view addSubview:self.logView];
+
 }
 
 
