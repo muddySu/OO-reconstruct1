@@ -14,10 +14,10 @@
 #define Screen_WIDTH [[UIScreen mainScreen] bounds].size.width
 #define Screen_HEIGHT [[UIScreen mainScreen] bounds].size.height
 
-#define LAND_WIDTH ((APPWIDTH > APPHEIGHT) ? (APPWIDTH):(APPHEIGHT))
-#define PORT_WIDTH ((APPWIDTH < APPHEIGHT) ? (APPWIDTH):(APPHEIGHT))
-#define LAND_HEIGTH ((APPWIDTH < APPHEIGHT) ? (APPWIDTH):(APPHEIGHT))
-#define PORT_HEIGTH ((APPWIDTH > APPHEIGHT) ? (APPWIDTH):(APPHEIGHT))
+#define LAND_WIDTH ((Screen_WIDTH > Screen_HEIGHT) ? (Screen_WIDTH):(Screen_HEIGHT))
+#define PORT_WIDTH ((Screen_WIDTH < Screen_HEIGHT) ? (Screen_WIDTH):(Screen_HEIGHT))
+#define LAND_HEIGTH ((Screen_WIDTH < Screen_HEIGHT) ? (Screen_WIDTH):(Screen_HEIGHT))
+#define PORT_HEIGTH ((Screen_WIDTH > Screen_HEIGHT) ? (Screen_WIDTH):(Screen_HEIGHT))
 
 #define IOS_7 ((deviceVersion >= 7.0 && deviceVersion< 8.0) ? (1):(0))
 #define IOS_8 ((deviceVersion >= 8.0 ) ? (1):(0))

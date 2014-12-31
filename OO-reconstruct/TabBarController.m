@@ -7,13 +7,16 @@
 //
 
 #import "TabBarController.h"
-
+@interface TabBarController()
+{
+}
+@end
 @implementation TabBarController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _filesView = [[FilesViewController alloc] init];
+    _filesView = [[FliesViewController alloc] init];
     _chatView = [[ChatViewController alloc] init];
     _aboutView = [[AboutViewController alloc] init];
     
@@ -33,7 +36,9 @@
 
     self.logView = [[loginView alloc] initWithFrame:CGRectMake(0, 0, Screen_WIDTH, Screen_HEIGHT)];
     [self.view addSubview:self.logView];
-
+    
+    //set delegate
+    self.logView.delegate = self;
 }
 
 
@@ -79,6 +84,10 @@
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.logView endEditing:YES];
+}
+
+- (void)logViewShouldDelloc{
+    self.logView = nil;             //memory release;
 }
 
 - (void)didReceiveMemoryWarning {

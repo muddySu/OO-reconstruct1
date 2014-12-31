@@ -1,36 +1,18 @@
 //
-//  loginView.h
+//  View.h
 //  OO-reconstruct
 //
-//  Created by su on 12/22/14.
+//  Created by su on 12/31/14.
 //  Copyright (c) 2014 su. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-@protocol postViewWWillMoveDelegate <NSObject>
-- (void) logViewShouldDelloc;
-@end
-
-@interface loginView : UIView<UITextFieldDelegate>
+/**
+ @des:该view作为所有view的父类，你应该继承他而不是直接实例化他
+ */
+@interface View : UIView
 {
 }
-//ui
-@property (nonatomic, strong) UITextField *useName;
-@property (nonatomic, strong) UITextField *passWord;
-@property (nonatomic, strong) UIButton *logButton;
-@property (nonatomic, strong) UIActivityIndicatorView *activityView;
-@property (nonatomic, strong) UISwitch *storeSwitch;
-
-//string
-@property (nonatomic, copy) NSString *useNameString;
-@property (nonatomic, copy) NSString *passWordString;
-
-//net work
-@property (nonatomic, assign)BOOL isExistenceNetwork;
-
-//delegate
-@property (nonatomic, weak)id<postViewWWillMoveDelegate>delegate;
-
 
 //setting uilabel
 - (void)setLabelStyle:(UILabel *)_Label
@@ -58,4 +40,5 @@
    andLayerborderWidth:(CGFloat)borderWidth
   andLayercornerRadius:(CGFloat)cornerRadius withLayermasksToBounds:(BOOL)flag
     andBackgroundColor:(UIColor *)backColor withLayerborderColor:(UIColor *)borderColor;
+
 @end

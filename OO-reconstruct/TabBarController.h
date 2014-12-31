@@ -10,10 +10,10 @@
 
 #import <UIKit/UIKit.h>
 #import "loginView.h"
-#import "FilesViewController.h"
+#import "FliesViewController.h"
 #import "AboutViewController.h"
 #import "ChatViewController.h"
-@interface TabBarController : UITabBarController
+@interface TabBarController : UITabBarController<postViewWWillMoveDelegate>
 {
 }
 
@@ -21,7 +21,7 @@
 @property (nonatomic, strong) UINavigationController *fileNav;
 @property (nonatomic, strong) UINavigationController *chatNav;
 @property (nonatomic, strong) UINavigationController *aboutNav;
-@property (nonatomic, strong) FilesViewController *filesView;
+@property (nonatomic, strong) FliesViewController *filesView;
 @property (nonatomic, strong) AboutViewController *aboutView;
 @property (nonatomic, strong) ChatViewController *chatView;
 

@@ -200,6 +200,7 @@
     _button.layer.borderColor = (__bridge CGColorRef)(borderColor);
 }
 
+
 #pragma mark
 #pragma mark - 登录请求
 - (void) requestForLogin{
@@ -244,6 +245,7 @@
                 }else{
                     handleLogResponedData *handle = [[handleLogResponedData alloc] init];
                     [handle handThelogResponedData:data];
+                    [_delegate logViewShouldDelloc];
                     [self removeFromSuperview];
                 }
             }
@@ -254,7 +256,6 @@
         }];
         [opearation start];
     }
-    //[self removeFromSuperview];
 }
 
 - (void)chargeIsHasNetWork{

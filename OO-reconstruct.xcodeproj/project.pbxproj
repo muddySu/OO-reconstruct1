@@ -51,7 +51,6 @@
 		907707FA1A47A7050075CBE3 /* loginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 907707F91A47A7050075CBE3 /* loginView.m */; };
 		907707FE1A47FAED0075CBE3 /* MyMD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 907707FD1A47FAED0075CBE3 /* MyMD5.m */; };
 		909810451A4BE929000479D1 /* handleLogResponedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 909810441A4BE929000479D1 /* handleLogResponedData.m */; };
-		9098104B1A4C1249000479D1 /* FilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9098104A1A4C1249000479D1 /* FilesViewController.m */; };
 		9098104E1A4C13EE000479D1 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9098104D1A4C13EE000479D1 /* AboutViewController.m */; };
 		909810511A4C1406000479D1 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 909810501A4C1406000479D1 /* ChatViewController.m */; };
 		90A56B591A44000D00D0BE74 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A56B581A44000D00D0BE74 /* main.m */; };
@@ -61,6 +60,9 @@
 		90A56B641A44000D00D0BE74 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90A56B631A44000D00D0BE74 /* Images.xcassets */; };
 		90A56B671A44000D00D0BE74 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90A56B651A44000D00D0BE74 /* LaunchScreen.xib */; };
 		90A56B731A44000E00D0BE74 /* OO_reconstructTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A56B721A44000E00D0BE74 /* OO_reconstructTests.m */; };
+		90F0A1FE1A53F0E800755C9A /* FliesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F0A1FD1A53F0E800755C9A /* FliesViewController.m */; };
+		90F0A2011A53F2B600755C9A /* View.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F0A2001A53F2B600755C9A /* View.m */; };
+		90F0A2051A53F55D00755C9A /* AboutDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F0A2041A53F55D00755C9A /* AboutDetailViewController.m */; };
 		D5B0C93796F774658890A7C2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4CDFEC35B551208BB5D864 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -125,8 +127,6 @@
 		907707FD1A47FAED0075CBE3 /* MyMD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMD5.m; sourceTree = "<group>"; };
 		909810431A4BE929000479D1 /* handleLogResponedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = handleLogResponedData.h; sourceTree = "<group>"; };
 		909810441A4BE929000479D1 /* handleLogResponedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = handleLogResponedData.m; sourceTree = "<group>"; };
-		909810491A4C1249000479D1 /* FilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilesViewController.h; sourceTree = "<group>"; };
-		9098104A1A4C1249000479D1 /* FilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilesViewController.m; sourceTree = "<group>"; };
 		9098104C1A4C13EE000479D1 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		9098104D1A4C13EE000479D1 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		9098104F1A4C1406000479D1 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
@@ -145,6 +145,12 @@
 		90A56B711A44000E00D0BE74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90A56B721A44000E00D0BE74 /* OO_reconstructTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OO_reconstructTests.m; sourceTree = "<group>"; };
 		90A56B7D1A44019B00D0BE74 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		90F0A1FC1A53F0E800755C9A /* FliesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FliesViewController.h; sourceTree = "<group>"; };
+		90F0A1FD1A53F0E800755C9A /* FliesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FliesViewController.m; sourceTree = "<group>"; };
+		90F0A1FF1A53F2B600755C9A /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
+		90F0A2001A53F2B600755C9A /* View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = View.m; sourceTree = "<group>"; };
+		90F0A2031A53F55D00755C9A /* AboutDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutDetailViewController.h; sourceTree = "<group>"; };
+		90F0A2041A53F55D00755C9A /* AboutDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutDetailViewController.m; sourceTree = "<group>"; };
 		9D4CDFEC35B551208BB5D864 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B35E4DAF40476821D6DE8E36 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E09A4BA29FC3368F3935B612 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -174,6 +180,8 @@
 			children = (
 				9098104C1A4C13EE000479D1 /* AboutViewController.h */,
 				9098104D1A4C13EE000479D1 /* AboutViewController.m */,
+				90F0A2031A53F55D00755C9A /* AboutDetailViewController.h */,
+				90F0A2041A53F55D00755C9A /* AboutDetailViewController.m */,
 			);
 			name = aboutView;
 			sourceTree = "<group>";
@@ -264,8 +272,8 @@
 		902C951B1A49424000355D7F /* fileView */ = {
 			isa = PBXGroup;
 			children = (
-				909810491A4C1249000479D1 /* FilesViewController.h */,
-				9098104A1A4C1249000479D1 /* FilesViewController.m */,
+				90F0A1FC1A53F0E800755C9A /* FliesViewController.h */,
+				90F0A1FD1A53F0E800755C9A /* FliesViewController.m */,
 			);
 			name = fileView;
 			sourceTree = "<group>";
@@ -273,6 +281,7 @@
 		907707F71A47A6EA0075CBE3 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				90F0A2021A53F2C100755C9A /* fatherView */,
 				900A63F31A4AA90C00AA3A60 /* chatView */,
 				900A63F21A4AA8FF00AA3A60 /* aboutView */,
 				902C951B1A49424000355D7F /* fileView */,
@@ -319,8 +328,6 @@
 				907707F71A47A6EA0075CBE3 /* view */,
 				90A56B5A1A44000D00D0BE74 /* AppDelegate.h */,
 				90A56B5B1A44000D00D0BE74 /* AppDelegate.m */,
-				90A56B5D1A44000D00D0BE74 /* ViewController.h */,
-				90A56B5E1A44000D00D0BE74 /* ViewController.m */,
 				900A644A1A4AB18700AA3A60 /* TabBarController.h */,
 				900A644B1A4AB18700AA3A60 /* TabBarController.m */,
 				90A56B601A44000D00D0BE74 /* Main.storyboard */,
@@ -357,6 +364,17 @@
 				90A56B711A44000E00D0BE74 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		90F0A2021A53F2C100755C9A /* fatherView */ = {
+			isa = PBXGroup;
+			children = (
+				90F0A1FF1A53F2B600755C9A /* View.h */,
+				90F0A2001A53F2B600755C9A /* View.m */,
+				90A56B5D1A44000D00D0BE74 /* ViewController.h */,
+				90A56B5E1A44000D00D0BE74 /* ViewController.m */,
+			);
+			name = fatherView;
 			sourceTree = "<group>";
 		};
 		A6A915CEA778A2B59E97FFDA /* Frameworks */ = {
@@ -549,8 +567,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90F0A2011A53F2B600755C9A /* View.m in Sources */,
 				90A56B5F1A44000D00D0BE74 /* ViewController.m in Sources */,
 				907707FE1A47FAED0075CBE3 /* MyMD5.m in Sources */,
+				90F0A1FE1A53F0E800755C9A /* FliesViewController.m in Sources */,
 				909810511A4C1406000479D1 /* ChatViewController.m in Sources */,
 				900A644C1A4AB18700AA3A60 /* TabBarController.m in Sources */,
 				90A56B5C1A44000D00D0BE74 /* AppDelegate.m in Sources */,
@@ -558,8 +578,8 @@
 				9098104E1A4C13EE000479D1 /* AboutViewController.m in Sources */,
 				907707FA1A47A7050075CBE3 /* loginView.m in Sources */,
 				90A56B591A44000D00D0BE74 /* main.m in Sources */,
+				90F0A2051A53F55D00755C9A /* AboutDetailViewController.m in Sources */,
 				909810451A4BE929000479D1 /* handleLogResponedData.m in Sources */,
-				9098104B1A4C1249000479D1 /* FilesViewController.m in Sources */,
 				902C95161A48FD8000355D7F /* DataStorage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

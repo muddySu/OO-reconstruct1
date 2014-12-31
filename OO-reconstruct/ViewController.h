@@ -7,22 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "loginView.h"
-#import "FilesViewController.h"
-#import "AboutViewController.h"
-#import "ChatViewController.h"
+/**
+ @des:viewController作为所有controller的基类，不要直接实例化它，应该继承它
+ */
 @interface ViewController : UIViewController
 {
 }
 
-@property (nonatomic, strong) loginView *logView;
-@property (nonatomic, strong) UITabBarController *tabbarController;
-@property (nonatomic, strong) UINavigationController *fileNav;
-@property (nonatomic, strong) UINavigationController *chatNav;
-@property (nonatomic, strong) UINavigationController *aboutNav;
-@property (nonatomic, strong) FilesViewController *filesView;
-@property (nonatomic, strong) AboutViewController *aboutView;
-@property (nonatomic, strong) ChatViewController *chatView;
 //横屏逻辑处理
 - (void)landscapeLogic;
 

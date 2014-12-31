@@ -7,9 +7,12 @@
 //
 
 #import "AboutViewController.h"
-
+#import "AboutDetailViewController.h"
+#import "DataStorage.h"
 @interface AboutViewController ()
-
+{
+    AboutDetailViewController *aboutDetailView;
+}
 @end
 
 @implementation AboutViewController
@@ -17,11 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,23 +32,67 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 0;
+    return 3;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if(cell == nil){
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    switch (indexPath.row) {
+        case 0:
+        {
+            cell.textLabel.text = [DataStorage sharedInstance].username;
+            cell.imageView.image = [UIImage imageNamed:@"photo"];
+        }
+            break;
+        case 1:
+        {
+            cell.textLabel.text = @"常见问题";
+            cell.imageView.image = [UIImage imageNamed:@"help"];
+        }
+            break;
+        case 2:
+        {
+            cell.textLabel.text = @"关于我们";
+            cell.imageView.image = [UIImage imageNamed:@"about"];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
+
 }
-*/
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    NSString *titleString;
+    if (indexPath.row == 1) {
+        titleString = @"常见问题";
+    }else if (indexPath.row == 2)
+    {
+        titleString = @"关于我们";
+    }
+    if (indexPath.row != 0) {
+        aboutDetailView = [[AboutDetailViewController alloc] init];
+        [aboutDetailView shouLoadWhichView:indexPath.row with:titleString];
+        [self.navigationController pushViewController:aboutDetailView animated:YES];
+    }
+    
+}
 
 /*
 // Override to support conditional editing of the table view.

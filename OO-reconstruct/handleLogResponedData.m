@@ -8,7 +8,7 @@
 
 #import "handleLogResponedData.h"
 #import "DataStorage.h"
-#import "FilesViewController.h"
+#import "FliesViewController.h"
 #import "ChatViewController.h"
 @implementation handleLogResponedData
 
@@ -75,6 +75,11 @@
     }
     
 }
+
+- (void)handTheFileResponeData:(NSData *)result{
+    
+}   //处理文件第一次请求数据
+
 
 @end
 

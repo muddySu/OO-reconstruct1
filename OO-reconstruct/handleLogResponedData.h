@@ -12,7 +12,8 @@
 @interface handleLogResponedData : NSObject
 {
 }
-- (void)handThelogResponedData:(NSData *)result;
+- (void)handThelogResponedData:(NSData *)result;   //处理登录请求数据
+- (void)handTheFileResponeData:(NSData *)result;   //处理文件第一次请求数据
 
 
 @end
