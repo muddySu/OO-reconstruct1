@@ -61,10 +61,13 @@
 
 - (void)portraitLogic{
     self.logView.frame = CGRectMake(0, 0, Screen_WIDTH, Screen_HEIGHT);
+    //旋转事件会被根viewcontroller:tabbarController截获，此处显式调用该方法来让其响应旋转事件
+    [_aboutView.aboutDetailView portraitLogic];
 }
 
 - (void)landscapeLogic{
     self.logView.frame = CGRectMake(0, 0, Screen_HEIGHT, Screen_WIDTH);
+    [_aboutView.aboutDetailView landscapeLogic];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{

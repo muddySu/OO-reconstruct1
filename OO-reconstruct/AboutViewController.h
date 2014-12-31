@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "AboutDetailViewController.h"
 @interface AboutViewController : UITableViewController
-
+@property (nonatomic, strong)AboutDetailViewController *aboutDetailView;;
 @end

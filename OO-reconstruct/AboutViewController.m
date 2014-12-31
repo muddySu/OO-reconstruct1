@@ -10,17 +10,14 @@
 #import "AboutDetailViewController.h"
 #import "DataStorage.h"
 @interface AboutViewController ()
-{
-    AboutDetailViewController *aboutDetailView;
-}
+
 @end
 
 @implementation AboutViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,9 +84,9 @@
         titleString = @"关于我们";
     }
     if (indexPath.row != 0) {
-        aboutDetailView = [[AboutDetailViewController alloc] init];
-        [aboutDetailView shouLoadWhichView:indexPath.row with:titleString];
-        [self.navigationController pushViewController:aboutDetailView animated:YES];
+        _aboutDetailView = [[AboutDetailViewController alloc] init];
+        [_aboutDetailView shouLoadWhichView:indexPath.row with:titleString];
+        [self.navigationController pushViewController:_aboutDetailView animated:YES];
     }
     
 }
