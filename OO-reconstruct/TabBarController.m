@@ -91,6 +91,7 @@
 
 - (void)logViewShouldDelloc{
     self.logView = nil;             //memory release;
+    [_filesView.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -10,6 +10,7 @@
 #import "DataStorage.h"
 #import "FliesViewController.h"
 #import "ChatViewController.h"
+#import "AppDelegate.h"
 @implementation handleLogResponedData
 
 
@@ -57,6 +58,9 @@
     NSMutableArray *bidArray = [[NSMutableArray alloc] init];
     NSMutableArray *nameArray = [[NSMutableArray alloc] init];
     
+    [AppDelegate userInfo].bidMutableArray = bidArray;
+    [AppDelegate userInfo].nameMutableArray = nameArray;
+    
     for (int i=0; i<[array count]; i++) {
         [bidArray addObject:(NSString *)[[array objectAtIndex:i] objectForKey:@"bid"]];
         //[nameArray addObject:(NSString *)[[array objectAtIndex:i] objectForKey:@"bn"]];
@@ -76,10 +80,9 @@
     
 }
 
+//处理文件第一次请求数据
 - (void)handTheFileResponeData:(NSData *)result{
     
-}   //处理文件第一次请求数据
-
-
+}  
 @end
 

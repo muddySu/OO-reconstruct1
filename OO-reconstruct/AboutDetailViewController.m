@@ -32,7 +32,7 @@
     questionlabel.numberOfLines = 0;
     questionlabel.text = questionString;
     questionlabel.frame = CGRectMake(0, 0, Screen_WIDTH, 320);
-    questionlabel.textAlignment = NSTextAlignmentLeft;
+    questionlabel.textAlignment = NSTextAlignmentCenter;
     questionlabel.lineBreakMode = NSLineBreakByWordWrapping;
 }
 

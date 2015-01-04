@@ -60,7 +60,8 @@
 		90A56B641A44000D00D0BE74 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90A56B631A44000D00D0BE74 /* Images.xcassets */; };
 		90A56B671A44000D00D0BE74 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90A56B651A44000D00D0BE74 /* LaunchScreen.xib */; };
 		90A56B731A44000E00D0BE74 /* OO_reconstructTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A56B721A44000E00D0BE74 /* OO_reconstructTests.m */; };
-		90F0A1FE1A53F0E800755C9A /* FliesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F0A1FD1A53F0E800755C9A /* FliesViewController.m */; };
+		90DB65691A593592002F58BF /* myCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90DB65681A593592002F58BF /* myCell.m */; };
+		90DB656C1A593999002F58BF /* FliesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90DB656B1A593999002F58BF /* FliesViewController.m */; };
 		90F0A2011A53F2B600755C9A /* View.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F0A2001A53F2B600755C9A /* View.m */; };
 		90F0A2051A53F55D00755C9A /* AboutDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F0A2041A53F55D00755C9A /* AboutDetailViewController.m */; };
 		D5B0C93796F774658890A7C2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4CDFEC35B551208BB5D864 /* libPods.a */; };
@@ -145,8 +146,10 @@
 		90A56B711A44000E00D0BE74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90A56B721A44000E00D0BE74 /* OO_reconstructTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OO_reconstructTests.m; sourceTree = "<group>"; };
 		90A56B7D1A44019B00D0BE74 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		90F0A1FC1A53F0E800755C9A /* FliesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FliesViewController.h; sourceTree = "<group>"; };
-		90F0A1FD1A53F0E800755C9A /* FliesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FliesViewController.m; sourceTree = "<group>"; };
+		90DB65671A593592002F58BF /* myCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myCell.h; sourceTree = "<group>"; };
+		90DB65681A593592002F58BF /* myCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myCell.m; sourceTree = "<group>"; };
+		90DB656A1A593999002F58BF /* FliesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FliesViewController.h; sourceTree = "<group>"; };
+		90DB656B1A593999002F58BF /* FliesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FliesViewController.m; sourceTree = "<group>"; };
 		90F0A1FF1A53F2B600755C9A /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
 		90F0A2001A53F2B600755C9A /* View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = View.m; sourceTree = "<group>"; };
 		90F0A2031A53F55D00755C9A /* AboutDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutDetailViewController.h; sourceTree = "<group>"; };
@@ -272,8 +275,10 @@
 		902C951B1A49424000355D7F /* fileView */ = {
 			isa = PBXGroup;
 			children = (
-				90F0A1FC1A53F0E800755C9A /* FliesViewController.h */,
-				90F0A1FD1A53F0E800755C9A /* FliesViewController.m */,
+				90DB65671A593592002F58BF /* myCell.h */,
+				90DB65681A593592002F58BF /* myCell.m */,
+				90DB656A1A593999002F58BF /* FliesViewController.h */,
+				90DB656B1A593999002F58BF /* FliesViewController.m */,
 			);
 			name = fileView;
 			sourceTree = "<group>";
@@ -570,10 +575,10 @@
 				90F0A2011A53F2B600755C9A /* View.m in Sources */,
 				90A56B5F1A44000D00D0BE74 /* ViewController.m in Sources */,
 				907707FE1A47FAED0075CBE3 /* MyMD5.m in Sources */,
-				90F0A1FE1A53F0E800755C9A /* FliesViewController.m in Sources */,
 				909810511A4C1406000479D1 /* ChatViewController.m in Sources */,
 				900A644C1A4AB18700AA3A60 /* TabBarController.m in Sources */,
 				90A56B5C1A44000D00D0BE74 /* AppDelegate.m in Sources */,
+				90DB65691A593592002F58BF /* myCell.m in Sources */,
 				902C95191A48FD9500355D7F /* httpRequest.m in Sources */,
 				9098104E1A4C13EE000479D1 /* AboutViewController.m in Sources */,
 				907707FA1A47A7050075CBE3 /* loginView.m in Sources */,
@@ -581,6 +586,7 @@
 				90F0A2051A53F55D00755C9A /* AboutDetailViewController.m in Sources */,
 				909810451A4BE929000479D1 /* handleLogResponedData.m in Sources */,
 				902C95161A48FD8000355D7F /* DataStorage.m in Sources */,
+				90DB656C1A593999002F58BF /* FliesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
