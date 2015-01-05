@@ -10,4 +10,10 @@
 
 @interface FliesViewController : UITableViewController
 
+//instance method
++ (instancetype)shareInstance;
++ (void)releaseInstance;
+
+//pass arraymethod
+- (void)getArrayFromResponsedData:(NSMutableArray *)bidArray and:(NSMutableArray *)nameArray;
 @end

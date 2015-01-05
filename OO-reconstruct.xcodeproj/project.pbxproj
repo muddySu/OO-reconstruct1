@@ -48,6 +48,9 @@
 		900A644C1A4AB18700AA3A60 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 900A644B1A4AB18700AA3A60 /* TabBarController.m */; };
 		902C95161A48FD8000355D7F /* DataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 902C95151A48FD8000355D7F /* DataStorage.m */; };
 		902C95191A48FD9500355D7F /* httpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 902C95181A48FD9500355D7F /* httpRequest.m */; };
+		906FB72A1A5A73A6001A4AE3 /* FileDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 906FB7291A5A73A6001A4AE3 /* FileDetailViewController.m */; };
+		906FB72D1A5A89CC001A4AE3 /* RealFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 906FB72C1A5A89CC001A4AE3 /* RealFileViewController.m */; };
+		906FB7301A5A936B001A4AE3 /* AFDownloadRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 906FB72F1A5A936B001A4AE3 /* AFDownloadRequestOperation.m */; };
 		907707FA1A47A7050075CBE3 /* loginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 907707F91A47A7050075CBE3 /* loginView.m */; };
 		907707FE1A47FAED0075CBE3 /* MyMD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 907707FD1A47FAED0075CBE3 /* MyMD5.m */; };
 		909810451A4BE929000479D1 /* handleLogResponedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 909810441A4BE929000479D1 /* handleLogResponedData.m */; };
@@ -122,6 +125,12 @@
 		902C95151A48FD8000355D7F /* DataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStorage.m; sourceTree = "<group>"; };
 		902C95171A48FD9500355D7F /* httpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = httpRequest.h; sourceTree = "<group>"; };
 		902C95181A48FD9500355D7F /* httpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = httpRequest.m; sourceTree = "<group>"; };
+		906FB7281A5A73A6001A4AE3 /* FileDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDetailViewController.h; sourceTree = "<group>"; };
+		906FB7291A5A73A6001A4AE3 /* FileDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileDetailViewController.m; sourceTree = "<group>"; };
+		906FB72B1A5A89CC001A4AE3 /* RealFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealFileViewController.h; sourceTree = "<group>"; };
+		906FB72C1A5A89CC001A4AE3 /* RealFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealFileViewController.m; sourceTree = "<group>"; };
+		906FB72E1A5A936B001A4AE3 /* AFDownloadRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDownloadRequestOperation.h; sourceTree = "<group>"; };
+		906FB72F1A5A936B001A4AE3 /* AFDownloadRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDownloadRequestOperation.m; sourceTree = "<group>"; };
 		907707F81A47A7050075CBE3 /* loginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginView.h; sourceTree = "<group>"; };
 		907707F91A47A7050075CBE3 /* loginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginView.m; sourceTree = "<group>"; };
 		907707FC1A47FAED0075CBE3 /* MyMD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMD5.h; sourceTree = "<group>"; };
@@ -266,8 +275,6 @@
 			children = (
 				907707F81A47A7050075CBE3 /* loginView.h */,
 				907707F91A47A7050075CBE3 /* loginView.m */,
-				909810431A4BE929000479D1 /* handleLogResponedData.h */,
-				909810441A4BE929000479D1 /* handleLogResponedData.m */,
 			);
 			name = loginView;
 			sourceTree = "<group>";
@@ -279,8 +286,30 @@
 				90DB65681A593592002F58BF /* myCell.m */,
 				90DB656A1A593999002F58BF /* FliesViewController.h */,
 				90DB656B1A593999002F58BF /* FliesViewController.m */,
+				906FB7281A5A73A6001A4AE3 /* FileDetailViewController.h */,
+				906FB7291A5A73A6001A4AE3 /* FileDetailViewController.m */,
+				906FB72B1A5A89CC001A4AE3 /* RealFileViewController.h */,
+				906FB72C1A5A89CC001A4AE3 /* RealFileViewController.m */,
 			);
 			name = fileView;
+			sourceTree = "<group>";
+		};
+		906FB7271A5A67E8001A4AE3 /* handResponedData */ = {
+			isa = PBXGroup;
+			children = (
+				909810431A4BE929000479D1 /* handleLogResponedData.h */,
+				909810441A4BE929000479D1 /* handleLogResponedData.m */,
+			);
+			name = handResponedData;
+			sourceTree = "<group>";
+		};
+		906FB7311A5A9370001A4AE3 /* Download */ = {
+			isa = PBXGroup;
+			children = (
+				906FB72E1A5A936B001A4AE3 /* AFDownloadRequestOperation.h */,
+				906FB72F1A5A936B001A4AE3 /* AFDownloadRequestOperation.m */,
+			);
+			name = Download;
 			sourceTree = "<group>";
 		};
 		907707F71A47A6EA0075CBE3 /* view */ = {
@@ -327,6 +356,8 @@
 		90A56B551A44000D00D0BE74 /* OO-reconstruct */ = {
 			isa = PBXGroup;
 			children = (
+				906FB7311A5A9370001A4AE3 /* Download */,
+				906FB7271A5A67E8001A4AE3 /* handResponedData */,
 				902C95131A48FD6700355D7F /* cookies */,
 				902C950F1A48FBF800355D7F /* requestbody */,
 				907707FB1A47FAD60075CBE3 /* MD5 */,
@@ -572,6 +603,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				906FB7301A5A936B001A4AE3 /* AFDownloadRequestOperation.m in Sources */,
 				90F0A2011A53F2B600755C9A /* View.m in Sources */,
 				90A56B5F1A44000D00D0BE74 /* ViewController.m in Sources */,
 				907707FE1A47FAED0075CBE3 /* MyMD5.m in Sources */,
@@ -579,6 +611,8 @@
 				900A644C1A4AB18700AA3A60 /* TabBarController.m in Sources */,
 				90A56B5C1A44000D00D0BE74 /* AppDelegate.m in Sources */,
 				90DB65691A593592002F58BF /* myCell.m in Sources */,
+				906FB72D1A5A89CC001A4AE3 /* RealFileViewController.m in Sources */,
+				906FB72A1A5A73A6001A4AE3 /* FileDetailViewController.m in Sources */,
 				902C95191A48FD9500355D7F /* httpRequest.m in Sources */,
 				9098104E1A4C13EE000479D1 /* AboutViewController.m in Sources */,
 				907707FA1A47A7050075CBE3 /* loginView.m in Sources */,

@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface httpRequest : NSObject
+@interface httpRequest : NSMutableURLRequest
 
--(NSMutableURLRequest *)getData:(NSData *)postdata;
--(NSMutableURLRequest *)getDataWithCookies:(NSData *)postdata;
--(NSMutableURLRequest *)getFilesWithCookies:(NSData *)postdata;
+//-(NSMutableURLRequest *)initGetData:(NSData *)postdata;
++ (instancetype)initGetData:(NSData *)postdata;
++ (instancetype)initGetDataWithCookies:(NSData *)postdata;
++ (instancetype)initGetFilesWithCookies:(NSData *)postdata;
 @end

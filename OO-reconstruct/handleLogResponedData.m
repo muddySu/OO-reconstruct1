@@ -10,11 +10,10 @@
 #import "DataStorage.h"
 #import "FliesViewController.h"
 #import "ChatViewController.h"
-#import "AppDelegate.h"
 @implementation handleLogResponedData
 
 
-
+//处理登录请求
 - (void)handThelogResponedData:(NSData *)data
 {
     NSError *error;
@@ -54,12 +53,10 @@
         NSLog(@"no first");
     }
     
-    //delegate to fileView
+    //array need to pass to filesviewcontroller
     NSMutableArray *bidArray = [[NSMutableArray alloc] init];
     NSMutableArray *nameArray = [[NSMutableArray alloc] init];
     
-    [AppDelegate userInfo].bidMutableArray = bidArray;
-    [AppDelegate userInfo].nameMutableArray = nameArray;
     
     for (int i=0; i<[array count]; i++) {
         [bidArray addObject:(NSString *)[[array objectAtIndex:i] objectForKey:@"bid"]];
@@ -77,12 +74,43 @@
         }
         
     }
-    
+    [[FliesViewController shareInstance] getArrayFromResponsedData:bidArray and:nameArray];
 }
 
 //处理文件第一次请求数据
 - (void)handTheFileResponeData:(NSData *)result{
-    
-}  
+    NSError *error;
+    NSDictionary *jsonDic =[NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments   error:&error];
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    if ([jsonDic objectForKey:@"r"]) {
+        for (int i = 0; i<[[jsonDic objectForKey:@"r"] count]; i++) {
+            [array addObject:[[jsonDic objectForKey:@"r"] objectAtIndex:i]];
+        }
+        
+        //array need to pass
+        NSMutableArray *fileNameArray = [[NSMutableArray alloc] init];
+        NSMutableArray *newbidFileArray = [[NSMutableArray alloc] init];
+        
+        for (int i=0; i<[array count]; i++) {
+            if ([[[array objectAtIndex:i] objectForKey:@"bn"] isEqualToString:@""]) {
+                [fileNameArray addObject:@"抽屉"];
+            }else
+            {
+                NSString *nameString = (NSString *)[[array objectAtIndex:i] objectForKey:@"bn"];
+                NSRange range1 = [nameString rangeOfString:@"<"];
+                NSRange range2 = [nameString rangeOfString:@">"];
+                NSRange range3 = [nameString rangeOfString:@"/"];
+                if (range1.location != NSNotFound && range2.location != NSNotFound && range3.location != NSNotFound) {
+                    NSString *realnameString = [nameString substringWithRange:NSMakeRange(range2.location+1, range3.location-range2.location-2)];
+                    [fileNameArray addObject:realnameString];
+                }else{
+                    [fileNameArray addObject:(NSString *)[[array objectAtIndex:i] objectForKey:@"bn"]];
+                }
+            }
+            [newbidFileArray addObject:[[array objectAtIndex:i] objectForKey:@"bid"]];
+        }
+        
+    }
+}
 @end
 

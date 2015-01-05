@@ -10,10 +10,10 @@
 #import "DataStorage.h"
 @implementation httpRequest
 
--(NSMutableURLRequest *)getData:(NSData *)postdata
++ (instancetype)initGetData:(NSData *)postdata
 {
     NSURL *url = [NSURL URLWithString:@"http://oo.oobg.cn/do/do.php"];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    httpRequest *request = [[httpRequest alloc] init];
     [request setURL:url];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:postdata];
@@ -25,12 +25,12 @@
     return request;
 }
 
--(NSMutableURLRequest *)getDataWithCookies:(NSData *)postdata
++ (instancetype)initGetDataWithCookies:(NSData *)postdata;
 {
     DataStorage *dataStorge = [DataStorage sharedInstance];
     //NSLog(@"dataStorge.cookie in httpRequest %@",dataStorge.cookie);
     NSURL *url = [NSURL URLWithString:@"http://oo.oobg.cn/do/do.php"];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    httpRequest *request = [[httpRequest alloc] init];
     [request setURL:url];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:postdata];
@@ -43,13 +43,13 @@
     return request;
 }
 
--(NSMutableURLRequest *)getFilesWithCookies:(NSData *)postdata
++ (instancetype)initGetFilesWithCookies:(NSData *)postdata;
 {
     DataStorage *dataStorge = [DataStorage sharedInstance];
     //NSLog(@"dataStorge.cookie in httpRequest %@",dataStorge.cookie);
     NSString *a = [[NSString alloc] initWithData:postdata encoding:NSUTF8StringEncoding];
     NSURL *url = [NSURL URLWithString:a];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    httpRequest *request = [[httpRequest alloc] initWithURL:url];
     //[request setURL:url];
     [request setHTTPMethod:@"POST"];
     //[request setHTTPBody:postdata];

@@ -16,7 +16,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _filesView = [[FliesViewController alloc] init];
+    _filesView = [FliesViewController shareInstance];
     _chatView = [[ChatViewController alloc] init];
     _aboutView = [[AboutViewController alloc] init];
     
@@ -91,7 +91,6 @@
 
 - (void)logViewShouldDelloc{
     self.logView = nil;             //memory release;
-    [_filesView.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

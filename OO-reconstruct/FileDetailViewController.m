@@ -1,56 +1,31 @@
 //
-//  FliesViewController.m
+//  FileDetailViewController.m
 //  OO-reconstruct
 //
-//  Created by su on 1/4/15.
+//  Created by su on 1/5/15.
 //  Copyright (c) 2015 su. All rights reserved.
 //
 
-#import "FliesViewController.h"
-#import "httpRequest.h"
-#import "AFHTTPRequestOperationManager.h"
-#import "myCell.h"
-#import "DataStorage.h"
 #import "FileDetailViewController.h"
-@interface FliesViewController ()
+#import "AFHTTPRequestOperationManager.h"
+#import "httpRequest.h"
+#import "myCell.h"
+#import "RealFileViewController.h"
+@interface FileDetailViewController ()
 {
-    NSMutableArray *bidFileArray;
-    NSMutableArray *nameFileArray;
+    NSMutableArray *bidFileArray;            //存放用于请求的bid
+    NSMutableArray *nameFileArray;           //存放文件名称
     UIImage *fileIconImage;
     NSString *requestBodyString;
 }
 @end
 
-@implementation FliesViewController
-
-static FliesViewController *instance = nil;
-+ (instancetype)shareInstance{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[FliesViewController alloc] init];
-    });
-    return instance;
-}
-
-+ (void)releaseInstance
-{
-    instance = nil;
-}
+@implementation FileDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.navigationItem setTitle:@"欧欧云办公"];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     fileIconImage = [UIImage imageNamed:@"newfile"];
-    
-    
-}
-
-- (void)getArrayFromResponsedData:(NSMutableArray *)bidArray and:(NSMutableArray *)nameArray{
-    bidFileArray = bidArray;
-    nameFileArray = nameArray;
-    [self.tableView reloadData];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,15 +33,22 @@ static FliesViewController *instance = nil;
     // Dispose of any resources that can be recreated.
 }
 
+- (void)getDataFormFilesView:(NSMutableArray *)bidArray and:(NSMutableArray *)nameArray{
+    bidFileArray = bidArray;
+    nameFileArray = nameArray;
+    [self.tableView reloadData];
+}
+
+
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     if ([nameFileArray count]>0) {
         return [nameFileArray count];
     }else{
@@ -90,18 +72,16 @@ static FliesViewController *instance = nil;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     requestBodyString = [bidFileArray objectAtIndex:indexPath.row];
-    [self requestForFile];
+    [self requestForTheFile];
 }
 
-#pragma mark
-#pragma mark - 私有方法
-- (void)requestForFile{
-    WS(weakSelf);
-    NSString *newString = [NSString stringWithFormat:@"%@%@",@"a=022&bid=",requestBodyString];
+- (void)requestForTheFile{
+    NSString *newString = [NSString stringWithFormat:@"%@%@",@"a=023&start=0&limit=20&bid=",requestBodyString];
     NSData *newData = [newString dataUsingEncoding:NSUTF8StringEncoding];
     httpRequest *request = [httpRequest initGetDataWithCookies:newData];
     AFHTTPRequestOperation *opearation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [opearation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
         NSError *error;
         NSDictionary *jsonDic =[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments   error:&error];
         NSMutableArray *array = [[NSMutableArray alloc] init];
@@ -109,39 +89,39 @@ static FliesViewController *instance = nil;
             for (int i = 0; i<[[jsonDic objectForKey:@"r"] count]; i++) {
                 [array addObject:[[jsonDic objectForKey:@"r"] objectAtIndex:i]];
             }
-            
-            //array need to pass
             NSMutableArray *fileNameArray = [[NSMutableArray alloc] init];
             NSMutableArray *newbidFileArray = [[NSMutableArray alloc] init];
-            
             for (int i=0; i<[array count]; i++) {
-                if ([[[array objectAtIndex:i] objectForKey:@"bn"] isEqualToString:@""]) {
-                    [fileNameArray addObject:@"抽屉"];
-                }else
-                {
-                    NSString *nameString = (NSString *)[[array objectAtIndex:i] objectForKey:@"bn"];
-                    NSRange range1 = [nameString rangeOfString:@"<"];
-                    NSRange range2 = [nameString rangeOfString:@">"];
-                    NSRange range3 = [nameString rangeOfString:@"/"];
-                    if (range1.location != NSNotFound && range2.location != NSNotFound && range3.location != NSNotFound) {
-                        NSString *realnameString = [nameString substringWithRange:NSMakeRange(range2.location+1, range3.location-range2.location-2)];
-                        [fileNameArray addObject:realnameString];
-                    }else{
-                        [fileNameArray addObject:(NSString *)[[array objectAtIndex:i] objectForKey:@"bn"]];
-                    }
-                }
-                [newbidFileArray addObject:[[array objectAtIndex:i] objectForKey:@"bid"]];
+                [fileNameArray addObject:[[array objectAtIndex:i] objectForKey:@"fn"]];
+                [newbidFileArray addObject:[[array objectAtIndex:i] objectForKey:@"fid"]];
             }
-            FileDetailViewController *detailView = [[FileDetailViewController alloc] init];
-            [detailView getDataFormFilesView:newbidFileArray and:newbidFileArray];
-            [weakSelf.navigationController pushViewController:detailView animated:YES];
+            //NSLog(@"newbidFileArray %@",newbidFileArray);
+            //push viewcontroller
+            
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [[[UIAlertView alloc] initWithTitle:@"Attention" message:@"请求失败，请检测网络或重新请求" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
     }];
-    [opearation start];
+
 }
+/*
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    
+    // Configure the cell...
+    
+    return cell;
+}
+*/
+
+/*
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+*/
 
 /*
 // Override to support editing the table view.

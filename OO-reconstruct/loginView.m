@@ -12,6 +12,7 @@
 #import "httpRequest.h"
 #import "MyMD5.h"
 #import "handleLogResponedData.h"
+#import "DataStorage.h"
 @interface loginView()
 {
     UILabel *titleLabel;
@@ -20,6 +21,7 @@
     //default
     NSUserDefaults *defaults;
     AFNetworkReachabilityManager *reachManager;
+    handleLogResponedData *handle;
 }
 @end
 @implementation loginView
@@ -224,13 +226,19 @@
         }
         NSString *str = [NSString stringWithFormat:@"%@%@%@%@%@",@"a=010&oo=",_useNameString,@"&pwd=",newpassword,@"&mac=&mac1=&mac2=&winver=2.12&oover=2.12&v=2.12"];
         NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
-        httpRequest *request = [[httpRequest alloc] init];
-        NSMutableURLRequest *URLRequest = [request getData:data];
+        httpRequest *URLRequest = [httpRequest initGetData:data];
         AFHTTPRequestOperation *opearation = [[AFHTTPRequestOperation alloc] initWithRequest:URLRequest];
         [opearation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             NSData *data = [[NSData alloc] initWithData:responseObject];
-            //NSLog(@"完成 %@", result);
+            
+            //setcookies :首次返回的cookies
+            NSHTTPURLResponse *httpResponse = operation.response;
+            NSArray *cookies = [NSHTTPCookie cookiesWithResponseHeaderFields:[httpResponse allHeaderFields] forURL:[NSURL URLWithString:@"http://oo.oobg.cn/do/do.php"]];
+            NSLog(@"cookies count %lu",(unsigned long)[cookies count]);
+            NSString *cookiesString = [[httpResponse allHeaderFields] valueForKey:@"Set-Cookie"];
+            [DataStorage sharedInstance].cookie = [[cookiesString componentsSeparatedByString:@";"] objectAtIndex:0];
+
             __strong __typeof(weakSelf)strongSelf = weakSelf;
             if (result.length < 4) {
                 [[[UIAlertView alloc] initWithTitle:@"Attention" message:@"用户名密码错误" delegate:weakSelf cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
@@ -238,12 +246,11 @@
             }else{
                 NSError *error;
                 NSDictionary *jsonDic =[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments   error:&error];
-                //NSLog(@"%@",jsonDic);
                 if (![jsonDic objectForKey:@"code"] || ![[jsonDic objectForKey:@"code"] isEqualToString:@"504"]) {
                     [[[UIAlertView alloc] initWithTitle:@"Attention" message:@"用户名密码错误" delegate:weakSelf cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
                     [strongSelf.activityView stopAnimating];
                 }else{
-                    handleLogResponedData *handle = [[handleLogResponedData alloc] init];
+                    handle = [[handleLogResponedData alloc] init];
                     [handle handThelogResponedData:data];
                     [_delegate logViewShouldDelloc];
                     [self removeFromSuperview];
@@ -253,6 +260,7 @@
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failure to get data");
+            [[[UIAlertView alloc] initWithTitle:@"Attention" message:@"请求失败，请检测网络或重新登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
         }];
         [opearation start];
     }
