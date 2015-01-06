@@ -42,8 +42,23 @@
 }
 
 
+-(void) viewDidAppear:(BOOL)animated
+{
+    [self.selectedViewController endAppearanceTransition];
+}
+
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [self.selectedViewController beginAppearanceTransition: NO animated: animated];
+}
+
+-(void) viewDidDisappear:(BOOL)animated
+{
+    [self.selectedViewController endAppearanceTransition];
+}
 
 - (void)viewWillAppear:(BOOL)animated{
+    [self.selectedViewController beginAppearanceTransition: YES animated: animated];
     [self changeLogicAfterRotation];          //视图加载前对横竖屏逻辑判断并适配
 }
 

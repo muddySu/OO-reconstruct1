@@ -10,6 +10,6 @@
 
 @interface RealFileViewController : UITableViewController
 
-- (void)getDataFormRealFilesView:(NSMutableArray *)bidArray and:(NSMutableArray *)nameArray;
+- (void)getDataFormFileDetailView:(NSMutableArray *)bidArray and:(NSMutableArray *)nameArray;
 
 @end

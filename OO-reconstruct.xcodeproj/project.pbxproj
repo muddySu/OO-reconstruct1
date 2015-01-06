@@ -65,6 +65,8 @@
 		90A56B731A44000E00D0BE74 /* OO_reconstructTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A56B721A44000E00D0BE74 /* OO_reconstructTests.m */; };
 		90DB65691A593592002F58BF /* myCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90DB65681A593592002F58BF /* myCell.m */; };
 		90DB656C1A593999002F58BF /* FliesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90DB656B1A593999002F58BF /* FliesViewController.m */; };
+		90ECA9461A5B742600344810 /* myFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90ECA9451A5B742600344810 /* myFileCell.m */; };
+		90ECA9491A5B7CFD00344810 /* ReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90ECA9481A5B7CFD00344810 /* ReadViewController.m */; };
 		90F0A2011A53F2B600755C9A /* View.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F0A2001A53F2B600755C9A /* View.m */; };
 		90F0A2051A53F55D00755C9A /* AboutDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F0A2041A53F55D00755C9A /* AboutDetailViewController.m */; };
 		D5B0C93796F774658890A7C2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4CDFEC35B551208BB5D864 /* libPods.a */; };
@@ -159,6 +161,10 @@
 		90DB65681A593592002F58BF /* myCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myCell.m; sourceTree = "<group>"; };
 		90DB656A1A593999002F58BF /* FliesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FliesViewController.h; sourceTree = "<group>"; };
 		90DB656B1A593999002F58BF /* FliesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FliesViewController.m; sourceTree = "<group>"; };
+		90ECA9441A5B742600344810 /* myFileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myFileCell.h; sourceTree = "<group>"; };
+		90ECA9451A5B742600344810 /* myFileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myFileCell.m; sourceTree = "<group>"; };
+		90ECA9471A5B7CFD00344810 /* ReadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadViewController.h; sourceTree = "<group>"; };
+		90ECA9481A5B7CFD00344810 /* ReadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadViewController.m; sourceTree = "<group>"; };
 		90F0A1FF1A53F2B600755C9A /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
 		90F0A2001A53F2B600755C9A /* View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = View.m; sourceTree = "<group>"; };
 		90F0A2031A53F55D00755C9A /* AboutDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutDetailViewController.h; sourceTree = "<group>"; };
@@ -284,12 +290,16 @@
 			children = (
 				90DB65671A593592002F58BF /* myCell.h */,
 				90DB65681A593592002F58BF /* myCell.m */,
+				90ECA9441A5B742600344810 /* myFileCell.h */,
+				90ECA9451A5B742600344810 /* myFileCell.m */,
 				90DB656A1A593999002F58BF /* FliesViewController.h */,
 				90DB656B1A593999002F58BF /* FliesViewController.m */,
 				906FB7281A5A73A6001A4AE3 /* FileDetailViewController.h */,
 				906FB7291A5A73A6001A4AE3 /* FileDetailViewController.m */,
 				906FB72B1A5A89CC001A4AE3 /* RealFileViewController.h */,
 				906FB72C1A5A89CC001A4AE3 /* RealFileViewController.m */,
+				90ECA9471A5B7CFD00344810 /* ReadViewController.h */,
+				90ECA9481A5B7CFD00344810 /* ReadViewController.m */,
 			);
 			name = fileView;
 			sourceTree = "<group>";
@@ -613,6 +623,8 @@
 				90DB65691A593592002F58BF /* myCell.m in Sources */,
 				906FB72D1A5A89CC001A4AE3 /* RealFileViewController.m in Sources */,
 				906FB72A1A5A73A6001A4AE3 /* FileDetailViewController.m in Sources */,
+				90ECA9491A5B7CFD00344810 /* ReadViewController.m in Sources */,
+				90ECA9461A5B742600344810 /* myFileCell.m in Sources */,
 				902C95191A48FD9500355D7F /* httpRequest.m in Sources */,
 				9098104E1A4C13EE000479D1 /* AboutViewController.m in Sources */,
 				907707FA1A47A7050075CBE3 /* loginView.m in Sources */,

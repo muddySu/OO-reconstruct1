@@ -8,11 +8,13 @@
 
 #import "RealFileViewController.h"
 #import "AFDownloadRequestOperation.h"
-#import "myCell.h"
+#import "myFileCell.h"
+#import "ReadViewController.h"
+#import "DataStorage.h"
 @interface RealFileViewController ()
 {
     NSMutableArray *FidArray;
-    NSMutableArray *FnNameArray;
+    NSMutableArray *FnNameArray;      //存储文件名称
     
     //requestURLArray-用于存储每一个文件对应的下载URL
     NSMutableArray *requestURLArray;
@@ -20,6 +22,7 @@
     NSMutableArray *operationArray;
     //webpath-存放下载完成文件的路径
     NSString *webPath;
+    ReadViewController *myReadView;
 }
 @end
 
@@ -28,38 +31,55 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
+    myReadView = [[ReadViewController alloc] init];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     NSFileManager *fileManager=[NSFileManager defaultManager];
     webPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/OOTemp"];
     if(![fileManager fileExistsAtPath:webPath])
     {
         [fileManager createDirectoryAtPath:webPath withIntermediateDirectories:YES attributes:nil error:nil];
     }
+    
+    //init array
+    requestURLArray = [[NSMutableArray alloc] init];
+    operationArray = [[NSMutableArray alloc] init];
+    for (int i=0; i<[FidArray count]; i++) {
+        [requestURLArray addObject:[NSString stringWithFormat:@"%@%@",@"http://oo.oobg.cn/do/do.php?a=02f5&ty=v&fid=",[FidArray objectAtIndex:i]]];
+        NSURL *url = [NSURL URLWithString:[requestURLArray objectAtIndex:i]];
+        NSMutableURLRequest *mutableRequest = [NSMutableURLRequest requestWithURL:url];
+        [mutableRequest setValue:[DataStorage sharedInstance].cookie forHTTPHeaderField:@"Cookie"];
+        NSLog(@"%@",[DataStorage sharedInstance].cookie);
+        
+        NSString *desPath = [webPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [FnNameArray objectAtIndex:i]]];
+        NSLog(@"%@",desPath);
+        
+        AFDownloadRequestOperation *operation = [[AFDownloadRequestOperation alloc] initWithRequest:mutableRequest targetPath:desPath shouldResume:YES];
+        [operationArray addObject:operation];
+    }
 
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)getDataFormRealFilesView:(NSMutableArray *)bidArray and:(NSMutableArray *)nameArray{
+#pragma mark - pass method
+- (void)getDataFormFileDetailView:(NSMutableArray *)bidArray and:(NSMutableArray *)nameArray{
     FidArray = bidArray;
     FnNameArray = nameArray;
     
     //set requestURLArray and operationArray
-    for (int i=0; i<[FidArray count]; i++) {
-        [requestURLArray addObject:[NSString stringWithFormat:@"%@%@",@"http://oo.oobg.cn/do/do.php?a=02f5&ty=v&fid=",[FidArray objectAtIndex:i]]];
-        NSURL *url = [NSURL URLWithString:[requestURLArray objectAtIndex:i]];
-        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-        AFDownloadRequestOperation *operation = [[AFDownloadRequestOperation alloc] initWithRequest:urlRequest targetPath:webPath shouldResume:YES];
-        [operationArray addObject:operation];
-    }
+//    [requestURLArray removeAllObjects];
+//    [operationArray removeAllObjects];
+//    for (int i=0; i<[FidArray count]; i++) {
+//        [requestURLArray addObject:[NSString stringWithFormat:@"%@%@",@"http://oo.oobg.cn/do/do.php?a=02f5&ty=v&fid=",[FidArray objectAtIndex:i]]];
+//        NSURL *url = [NSURL URLWithString:[requestURLArray objectAtIndex:i]];
+//        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+//        AFDownloadRequestOperation *operation = [[AFDownloadRequestOperation alloc] initWithRequest:urlRequest targetPath:webPath shouldResume:YES];
+//        [operationArray addObject:operation];
+//    }
     
     //reloadData
     [self.tableView reloadData];
@@ -104,8 +124,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    //return [FnNameArray count];
     if ([FnNameArray count] == 0) {
         return 1;
     }else{
@@ -116,23 +134,137 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    myCell *cell = (myCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    myFileCell *cell = (myFileCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if(cell == nil){
-        cell=[[myCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell=[[myFileCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     //cell.textLabel.text = [nameFileArray objectAtIndex:indexPath.row];
     if ([FnNameArray count] != 0) {
-        cell.image.image = [UIImage imageNamed:[self judgeTheIcon:[FnNameArray objectAtIndex:indexPath.row]]
-                            ];
-        cell.textlabel.text =[FnNameArray objectAtIndex:indexPath.row];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.fileIcon.image = [UIImage imageNamed:[self judgeTheIcon:
+                                                   [FnNameArray objectAtIndex:indexPath.row]]];
+        cell.fileName.text =[FnNameArray objectAtIndex:indexPath.row];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        if ([self fileExistWithName:[FnNameArray objectAtIndex:indexPath.row]]) {
+            [cell.actionButton setTitle:@"打开" forState:UIControlStateNormal];
+        }else{
+            [cell.actionButton setTitle:@"下载" forState:UIControlStateNormal];
+        }
     }else{
-        cell.textlabel.text =@"本抽屉没有文件";
-        cell.textlabel.textColor = [UIColor redColor];
+        cell.fileName.text =@"本抽屉没有文件";
+        cell.fileName.textColor = [UIColor redColor];
     }
+    cell.progressView.tag = indexPath.row;
+    cell.deleteButton.tag = indexPath.row;
+    cell.actionButton.tag = indexPath.row;
+    [cell.deleteButton addTarget:self action:@selector(deletaFile:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.actionButton addTarget:self action:@selector(downloadOrOpenFile:) forControlEvents:UIControlEventTouchUpInside];
+    
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+   
+}
+
+#pragma mark - cell button function
+- (void)downloadOrOpenFile:(id)sender{
+    UIButton* button = (UIButton*)sender;
+    NSInteger num = button.tag;
+    
+    //判断Documents/OOTemp目录下是否有对应的文件，若无则下载，若有则直接打开
+    if ([button.titleLabel.text  isEqual: @"打开"]) {
+        if ([[[[FnNameArray objectAtIndex:num] componentsSeparatedByString:@"."] objectAtIndex:1] isEqualToString:@"txt"]) {
+            //NSData *txtdata = [NSData dataWithContentsOfFile:pathString];
+            //载入txt
+        }else{
+            //载入其他
+        }
+    }else if([button.titleLabel.text  isEqual: @"下载"]){
+        //加入队列进行下载
+        AFDownloadRequestOperation *downOperation = [operationArray objectAtIndex:num];
+        [[NSOperationQueue mainQueue] addOperation:downOperation];
+        [button setTitle:@"暂停" forState:UIControlStateNormal];
+        //NSLog(@"tempPath = %@",downOperation.tempPath);
+        NSString *path = downOperation.tempPath;
+        myFileCell *cell = [[self.tableView visibleCells] objectAtIndex:num];
+        [downOperation setProgressiveDownloadProgressBlock:^(AFDownloadRequestOperation *operation, NSInteger bytesRead, long long totalBytesRead, long long totalBytesExpected, long long totalBytesReadForFile, long long totalBytesExpectedToReadForFile) {
+            //主线程更新UI
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cell.progressView.progress = totalBytesReadForFile/(float)totalBytesExpectedToReadForFile;
+            });
+        }];
+        [downOperation setCompletionBlock:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [button setTitle:@"打开" forState:UIControlStateNormal];
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                NSString *desPath = [webPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [FnNameArray objectAtIndex:num]]];
+                //下载完将数据从缓存拷贝到指定目录
+                [fileManager copyItemAtPath:path toPath:desPath error:nil];
+            });
+        }];
+    }else if ([button.titleLabel.text  isEqual: @"暂停"]){
+        [[operationArray objectAtIndex:num] suspend];
+        [button setTitle:@"继续" forState:UIControlStateNormal];
+    }else if ([button.titleLabel.text  isEqual: @"继续"]){
+        [[operationArray objectAtIndex:num] resume];
+        [button setTitle:@"暂停" forState:UIControlStateNormal];
+    }
+
+}
+
+- (void)deletaFile:(id)sender{
+    UIButton* button = (UIButton*)sender;
+    //NSLog(@"%ld",(long)button.tag);
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *desPath = [[documentsDirectory stringByAppendingPathComponent:@"Documents/OOTemp"] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [FnNameArray objectAtIndex:button.tag]]];
+    BOOL removeFlag = [fileManager removeItemAtPath:desPath error:nil];
+   
+    myFileCell *cell = [[self.tableView visibleCells] objectAtIndex:button.tag];
+    //NSLog(@"%ld",(long)cell.progressView.tag);
+    if (removeFlag) {
+        cell.progressView.progress = 0.0;
+    }
+    
+}
+
+#pragma mark - 读文件操作
+-(void)myFileViewLoadTxt:(NSData *)txtData with:(NSString *)filename
+{
+    [myReadView.fileWebView reload];
+    [myReadView.fileWebView loadData:txtData MIMEType:@"text/txt" textEncodingName:@"GBK" baseURL:nil];
+    [myReadView.navBarItem setTitle:filename];
+}
+
+-(void)myfileViewloadOther:(NSURL *)url with:(NSString *)filename
+{
+    [myReadView.fileWebView reload];
+    [myReadView.fileWebView loadRequest:[NSURLRequest requestWithURL:url]];
+    [myReadView.navBarItem setTitle:filename];
+}
+
+#pragma mark - 文件操作
+//判断目录下是否有文件
+- (BOOL)fileExistWithName:(NSString *)fileName {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *desPath = [[documentsDirectory stringByAppendingPathComponent:@"Documents/OOTemp"] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", fileName]];
+    return [fileManager fileExistsAtPath:desPath];
+}
+
+//删除目录下文件
+- (BOOL)deleteFileWithName:(NSString *)fileName{
+    NSError *error;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *desPath = [[documentsDirectory stringByAppendingPathComponent:@"Documents/OOTemp"] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", fileName]];
+    return [fileManager removeItemAtPath:desPath error:&error];
+}
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

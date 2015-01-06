@@ -17,6 +17,7 @@
     NSMutableArray *nameFileArray;           //存放文件名称
     UIImage *fileIconImage;
     NSString *requestBodyString;
+    RealFileViewController *realFileView;
 }
 @end
 
@@ -24,8 +25,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationItem setTitle:@"欧欧云办公"];
     fileIconImage = [UIImage imageNamed:@"newfile"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    realFileView = [[RealFileViewController alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,11 +74,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     requestBodyString = [bidFileArray objectAtIndex:indexPath.row];
     [self requestForTheFile];
 }
 
 - (void)requestForTheFile{
+    WS(weakSelf);
     NSString *newString = [NSString stringWithFormat:@"%@%@",@"a=023&start=0&limit=20&bid=",requestBodyString];
     NSData *newData = [newString dataUsingEncoding:NSUTF8StringEncoding];
     httpRequest *request = [httpRequest initGetDataWithCookies:newData];
@@ -97,13 +102,17 @@
             }
             //NSLog(@"newbidFileArray %@",newbidFileArray);
             //push viewcontroller
-            
+            //[realFileView getDataFormFileDetailView:newbidFileArray and:fileNameArray];
+            [weakSelf.navigationController pushViewController:realFileView animated:YES];
+            [realFileView getDataFormFileDetailView:newbidFileArray and:fileNameArray];
+
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [[[UIAlertView alloc] initWithTitle:@"Attention" message:@"请求失败，请检测网络或重新请求" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
     }];
 
+    [opearation start];
 }
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -18,6 +18,7 @@
     NSMutableArray *nameFileArray;
     UIImage *fileIconImage;
     NSString *requestBodyString;
+    FileDetailViewController *detailView;
 }
 @end
 
@@ -43,8 +44,7 @@ static FliesViewController *instance = nil;
     [self.navigationItem setTitle:@"欧欧云办公"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     fileIconImage = [UIImage imageNamed:@"newfile"];
-    
-    
+    detailView = [[FileDetailViewController alloc] init];
 }
 
 - (void)getArrayFromResponsedData:(NSMutableArray *)bidArray and:(NSMutableArray *)nameArray{
@@ -89,6 +89,7 @@ static FliesViewController *instance = nil;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     requestBodyString = [bidFileArray objectAtIndex:indexPath.row];
     [self requestForFile];
 }
@@ -132,9 +133,8 @@ static FliesViewController *instance = nil;
                 }
                 [newbidFileArray addObject:[[array objectAtIndex:i] objectForKey:@"bid"]];
             }
-            FileDetailViewController *detailView = [[FileDetailViewController alloc] init];
-            [detailView getDataFormFilesView:newbidFileArray and:newbidFileArray];
             [weakSelf.navigationController pushViewController:detailView animated:YES];
+            [detailView getDataFormFilesView:newbidFileArray and:newbidFileArray];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
