@@ -259,8 +259,10 @@
             [strongSelf.activityView stopAnimating];
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            __strong __typeof(weakSelf)strongSelf = weakSelf;
             NSLog(@"failure to get data");
             [[[UIAlertView alloc] initWithTitle:@"Attention" message:@"请求失败，请检测网络或重新登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+            [strongSelf.activityView stopAnimating];
         }];
         [opearation start];
     }

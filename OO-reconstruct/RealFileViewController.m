@@ -172,13 +172,19 @@
     UIButton* button = (UIButton*)sender;
     NSInteger num = button.tag;
     
+    NSString *desPath = [webPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [FnNameArray objectAtIndex:num]]];
+    
     //判断Documents/OOTemp目录下是否有对应的文件，若无则下载，若有则直接打开
     if ([button.titleLabel.text  isEqual: @"打开"]) {
         if ([[[[FnNameArray objectAtIndex:num] componentsSeparatedByString:@"."] objectAtIndex:1] isEqualToString:@"txt"]) {
-            //NSData *txtdata = [NSData dataWithContentsOfFile:pathString];
-            //载入txt
+             //载入txt
+            NSData *txtdata = [NSData dataWithContentsOfFile:desPath];
+            [self myFileViewLoadTxt:txtdata with:[FnNameArray objectAtIndex:num]];
+            
         }else{
-            //载入其他
+            //载入其他类型文本
+            NSURL *url = [NSURL URLWithString:desPath];
+            [self myfileViewloadOther:url with:[FnNameArray objectAtIndex:num]];
         }
     }else if([button.titleLabel.text  isEqual: @"下载"]){
         //加入队列进行下载
@@ -236,14 +242,16 @@
 {
     [myReadView.fileWebView reload];
     [myReadView.fileWebView loadData:txtData MIMEType:@"text/txt" textEncodingName:@"GBK" baseURL:nil];
-    [myReadView.navBarItem setTitle:filename];
+    [self.navigationItem setTitle:filename];
+    
 }
 
 -(void)myfileViewloadOther:(NSURL *)url with:(NSString *)filename
 {
     [myReadView.fileWebView reload];
     [myReadView.fileWebView loadRequest:[NSURLRequest requestWithURL:url]];
-    [myReadView.navBarItem setTitle:filename];
+    //[myReadView.navBarItem setTitle:filename];
+    [self.navigationItem setTitle:filename];
 }
 
 #pragma mark - 文件操作

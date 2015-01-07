@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface ReadViewController : ViewController
+@interface ReadViewController : ViewController<UIWebViewDelegate>
 @property (nonatomic, strong)UIWebView *fileWebView;
 @property (nonatomic, strong)UINavigationItem *navBarItem;
 @end
