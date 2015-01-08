@@ -25,6 +25,14 @@
     [super tearDown];
 }
 
+- (void)testAddition{
+    int coutn = 100;
+    for (int i=0; i<coutn; i++) {
+        
+    }
+    XCTAssert(YES, @"Pass");
+}
+
 - (void)testExample {
     // This is an example of a functional test case.
     XCTAssert(YES, @"Pass");

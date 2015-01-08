@@ -17,6 +17,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    WS(weakSelf);
+    _fileWebView = [[UIWebView alloc] init];
+    [self.view addSubview:_fileWebView];
+    [_fileWebView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.view).with.offset(0);
+        make.bottom.equalTo(weakSelf.view.bottom).with.offset(0);
+        make.left.equalTo(weakSelf.view.left).with.offset(0);
+        make.right.equalTo(weakSelf.view.right).with.offset(0);
+    }];
+    
+    UINavigationBar *navBar = [UINavigationBar new];
+    _navBarItem = [UINavigationItem new];
+    [self.view addSubview:navBar];
+    [navBar pushNavigationItem:_navBarItem animated:YES];
+    [navBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.view).with.offset(0);
+        make.left.equalTo(weakSelf.view.left).with.offset(0);
+        make.right.equalTo(weakSelf.view.right).with.offset(0);
+        make.height.mas_equalTo(@44);
+    }];
+    
+    UIBarButtonItem *cancleButton = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStyleBordered target:self action:@selector(closeView)];
+    _navBarItem.rightBarButtonItem = cancleButton;
+}
+
+//- (void)viewWillAppear:(BOOL)animated{
 //    WS(weakSelf);
 //    _fileWebView = [[UIWebView alloc] init];
 //    [self.view addSubview:_fileWebView];
@@ -26,17 +52,12 @@
 //        make.left.equalTo(weakSelf.view.left).with.offset(0);
 //        make.right.equalTo(weakSelf.view.right).with.offset(0);
 //    }];
-}
+//}
 
-- (void)viewWillAppear:(BOOL)animated{
-    WS(weakSelf);
-    _fileWebView = [[UIWebView alloc] init];
-    [self.view addSubview:_fileWebView];
-    [_fileWebView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.view).with.offset(0);
-        make.bottom.equalTo(weakSelf.view.bottom).with.offset(0);
-        make.left.equalTo(weakSelf.view.left).with.offset(0);
-        make.right.equalTo(weakSelf.view.right).with.offset(0);
+- (void)closeView{
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.view = nil;
+        _fileWebView = nil;
     }];
 }
 

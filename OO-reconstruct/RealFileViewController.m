@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    myReadView = [[ReadViewController alloc] init];
+    //myReadView = [[ReadViewController alloc] init];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     NSFileManager *fileManager=[NSFileManager defaultManager];
     webPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/OOTemp"];
@@ -146,6 +146,7 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
         if ([self fileExistWithName:[FnNameArray objectAtIndex:indexPath.row]]) {
             [cell.actionButton setTitle:@"打开" forState:UIControlStateNormal];
+            cell.progressView.progress = 1.0;
         }else{
             [cell.actionButton setTitle:@"下载" forState:UIControlStateNormal];
         }
@@ -221,16 +222,13 @@
 
 - (void)deletaFile:(id)sender{
     UIButton* button = (UIButton*)sender;
-    //NSLog(@"%ld",(long)button.tag);
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *desPath = [[documentsDirectory stringByAppendingPathComponent:@"Documents/OOTemp"] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [FnNameArray objectAtIndex:button.tag]]];
+    NSString *desPath = [webPath stringByAppendingPathComponent:[FnNameArray objectAtIndex:button.tag]];
     BOOL removeFlag = [fileManager removeItemAtPath:desPath error:nil];
    
     myFileCell *cell = [[self.tableView visibleCells] objectAtIndex:button.tag];
-    //NSLog(@"%ld",(long)cell.progressView.tag);
+
     if (removeFlag) {
         cell.progressView.progress = 0.0;
     }
@@ -240,9 +238,15 @@
 #pragma mark - 读文件操作
 -(void)myFileViewLoadTxt:(NSData *)txtData with:(NSString *)filename
 {
-    [myReadView.fileWebView reload];
-    [myReadView.fileWebView loadData:txtData MIMEType:@"text/txt" textEncodingName:@"GBK" baseURL:nil];
-    [self.navigationItem setTitle:filename];
+    ReadViewController *readView = [[ReadViewController alloc] init];
+    [readView.fileWebView reload];
+    [readView.fileWebView loadData:txtData MIMEType:@"text/txt" textEncodingName:@"GBK" baseURL:nil];
+    NSLog(@"%@",txtData);
+    [self presentViewController:readView animated:YES completion:^{
+        [readView.fileWebView reload];
+        [readView.fileWebView loadData:txtData MIMEType:@"text/txt" textEncodingName:@"GBK" baseURL:nil];
+    }];
+    [readView.navigationItem setTitle:filename];
     
 }
 
@@ -258,9 +262,7 @@
 //判断目录下是否有文件
 - (BOOL)fileExistWithName:(NSString *)fileName {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *desPath = [[documentsDirectory stringByAppendingPathComponent:@"Documents/OOTemp"] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", fileName]];
+    NSString *desPath = [webPath stringByAppendingPathComponent:fileName];
     return [fileManager fileExistsAtPath:desPath];
 }
 
@@ -268,9 +270,7 @@
 - (BOOL)deleteFileWithName:(NSString *)fileName{
     NSError *error;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *desPath = [[documentsDirectory stringByAppendingPathComponent:@"Documents/OOTemp"] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", fileName]];
+    NSString *desPath = [webPath stringByAppendingPathComponent:fileName];
     return [fileManager removeItemAtPath:desPath error:&error];
 }
 
