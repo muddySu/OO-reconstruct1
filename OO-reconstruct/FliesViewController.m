@@ -91,6 +91,7 @@ static FliesViewController *instance = nil;
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     requestBodyString = [bidFileArray objectAtIndex:indexPath.row];
+
     [self requestForFile];
 }
 
@@ -98,6 +99,7 @@ static FliesViewController *instance = nil;
 #pragma mark - 私有方法
 - (void)requestForFile{
     WS(weakSelf);
+    //WS(weakSelf);
     NSString *newString = [NSString stringWithFormat:@"%@%@",@"a=022&bid=",requestBodyString];
     NSData *newData = [newString dataUsingEncoding:NSUTF8StringEncoding];
     httpRequest *request = [httpRequest initGetDataWithCookies:newData];

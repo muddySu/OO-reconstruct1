@@ -76,11 +76,19 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     requestBodyString = [bidFileArray objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:realFileView animated:YES];
+
     [self requestForTheFile];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60.0;
+}
+
+
+#pragma mark - request method
+
 - (void)requestForTheFile{
-    WS(weakSelf);
     NSString *newString = [NSString stringWithFormat:@"%@%@",@"a=023&start=0&limit=20&bid=",requestBodyString];
     NSData *newData = [newString dataUsingEncoding:NSUTF8StringEncoding];
     httpRequest *request = [httpRequest initGetDataWithCookies:newData];
@@ -103,7 +111,7 @@
             //NSLog(@"newbidFileArray %@",newbidFileArray);
             //push viewcontroller
             //[realFileView getDataFormFileDetailView:newbidFileArray and:fileNameArray];
-            [weakSelf.navigationController pushViewController:realFileView animated:YES];
+            //[weakSelf.navigationController pushViewController:realFileView animated:YES];
             [realFileView getDataFormFileDetailView:newbidFileArray and:fileNameArray];
 
         }

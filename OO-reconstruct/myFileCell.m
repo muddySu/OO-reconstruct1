@@ -45,29 +45,30 @@
             make.height.mas_equalTo(@30);
             make.width.mas_equalTo(@30);
         }];
-        [_fileName mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(weakSelf.contentView).with.offset(5);
-            make.left.equalTo(weakSelf.fileIcon.right).with.offset(5);
-            make.height.mas_equalTo(@30);
-            make.width.mas_equalTo(@100);
-        }];
+        
         [_deleteButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(weakSelf.contentView).with.offset(5);
-            make.right.equalTo(weakSelf.contentView).with.offset(-5);
-            make.height.mas_equalTo(@30);
-            make.width.mas_equalTo(@30);
+            make.right.equalTo(weakSelf.contentView).with.offset(0);
+            make.height.mas_equalTo(@40);
+            make.width.mas_equalTo(@50);
         }];
         [_actionButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(weakSelf.contentView).with.offset(5);
             make.right.equalTo(weakSelf.deleteButton.left).with.offset(-5);
-            make.height.mas_equalTo(@30);
-            make.width.mas_equalTo(@30);
+            make.height.mas_equalTo(@40);
+            make.width.mas_equalTo(@50);
         }];
         [_progressView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(weakSelf.contentView).with.offset(20);
-            make.right.equalTo(weakSelf.actionButton.left).with.offset(-10);
+            make.top.equalTo(weakSelf.contentView).with.offset(30);
+            make.right.equalTo(weakSelf.actionButton.left).with.offset(-15);
             //make.height.mas_equalTo(@30);
-            make.width.mas_equalTo(@100);
+            make.width.mas_equalTo(@80);
+        }];
+        [_fileName mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(weakSelf.contentView).with.offset(5);
+            make.left.equalTo(weakSelf.fileIcon.right).with.offset(5);
+            make.height.mas_equalTo(@30);
+            make.right.equalTo(weakSelf.actionButton.left).with.offset(-5);
         }];
         
     }

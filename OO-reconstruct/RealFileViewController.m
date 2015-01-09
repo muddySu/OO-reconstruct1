@@ -23,6 +23,7 @@
     //webpath-存放下载完成文件的路径
     NSString *webPath;
     ReadViewController *myReadView;
+    UIActivity *activity;
 }
 @end
 
@@ -43,19 +44,9 @@
     //init array
     requestURLArray = [[NSMutableArray alloc] init];
     operationArray = [[NSMutableArray alloc] init];
-    for (int i=0; i<[FidArray count]; i++) {
-        [requestURLArray addObject:[NSString stringWithFormat:@"%@%@",@"http://oo.oobg.cn/do/do.php?a=02f5&ty=v&fid=",[FidArray objectAtIndex:i]]];
-        NSURL *url = [NSURL URLWithString:[requestURLArray objectAtIndex:i]];
-        NSMutableURLRequest *mutableRequest = [NSMutableURLRequest requestWithURL:url];
-        [mutableRequest setValue:[DataStorage sharedInstance].cookie forHTTPHeaderField:@"Cookie"];
-        NSLog(@"%@",[DataStorage sharedInstance].cookie);
-        
-        NSString *desPath = [webPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [FnNameArray objectAtIndex:i]]];
-        NSLog(@"%@",desPath);
-        
-        AFDownloadRequestOperation *operation = [[AFDownloadRequestOperation alloc] initWithRequest:mutableRequest targetPath:desPath shouldResume:YES];
-        [operationArray addObject:operation];
-    }
+    
+    activity = [UIActivity new];
+    //self.navigationItem.rightBarButtonItem  = activity;
 
 }
 
@@ -71,15 +62,21 @@
     FnNameArray = nameArray;
     
     //set requestURLArray and operationArray
-//    [requestURLArray removeAllObjects];
-//    [operationArray removeAllObjects];
-//    for (int i=0; i<[FidArray count]; i++) {
-//        [requestURLArray addObject:[NSString stringWithFormat:@"%@%@",@"http://oo.oobg.cn/do/do.php?a=02f5&ty=v&fid=",[FidArray objectAtIndex:i]]];
-//        NSURL *url = [NSURL URLWithString:[requestURLArray objectAtIndex:i]];
-//        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-//        AFDownloadRequestOperation *operation = [[AFDownloadRequestOperation alloc] initWithRequest:urlRequest targetPath:webPath shouldResume:YES];
-//        [operationArray addObject:operation];
-//    }
+    [requestURLArray removeAllObjects];
+    [operationArray removeAllObjects];
+    for (int i=0; i<[FidArray count]; i++) {
+        [requestURLArray addObject:[NSString stringWithFormat:@"%@%@",@"http://oo.oobg.cn/do/do.php?a=02f5&ty=v&fid=",[FidArray objectAtIndex:i]]];
+        NSURL *url = [NSURL URLWithString:[requestURLArray objectAtIndex:i]];
+        NSMutableURLRequest *mutableRequest = [NSMutableURLRequest requestWithURL:url];
+        [mutableRequest setValue:[DataStorage sharedInstance].cookie forHTTPHeaderField:@"Cookie"];
+        //NSLog(@"%@",[DataStorage sharedInstance].cookie);
+        
+        NSString *desPath = [webPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [FnNameArray objectAtIndex:i]]];
+        //NSLog(@"%@",desPath);
+        
+        AFDownloadRequestOperation *operation = [[AFDownloadRequestOperation alloc] initWithRequest:mutableRequest targetPath:desPath shouldResume:YES];
+        [operationArray addObject:operation];
+    }
     
     //reloadData
     [self.tableView reloadData];
@@ -150,6 +147,7 @@
         }else{
             [cell.actionButton setTitle:@"下载" forState:UIControlStateNormal];
         }
+        cell.fileName.textColor = [UIColor blackColor];
     }else{
         cell.fileName.text =@"本抽屉没有文件";
         cell.fileName.textColor = [UIColor redColor];
@@ -168,6 +166,10 @@
    
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60.0;
+}
+
 #pragma mark - cell button function
 - (void)downloadOrOpenFile:(id)sender{
     UIButton* button = (UIButton*)sender;
@@ -184,24 +186,30 @@
             
         }else{
             //载入其他类型文本
-            NSURL *url = [NSURL URLWithString:desPath];
+            NSURL *url = [NSURL fileURLWithPath:desPath];
             [self myfileViewloadOther:url with:[FnNameArray objectAtIndex:num]];
         }
     }else if([button.titleLabel.text  isEqual: @"下载"]){
         //加入队列进行下载
-        AFDownloadRequestOperation *downOperation = [operationArray objectAtIndex:num];
-        [[NSOperationQueue mainQueue] addOperation:downOperation];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",@"http://oo.oobg.cn/do/do.php?a=02f5&ty=v&fid=",[FidArray objectAtIndex:num]]];
+        NSMutableURLRequest *mutableRequest = [NSMutableURLRequest requestWithURL:url];
+        [mutableRequest setValue:[DataStorage sharedInstance].cookie forHTTPHeaderField:@"Cookie"];
+        NSString *desPath = [webPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [FnNameArray objectAtIndex:num]]];
+        AFDownloadRequestOperation *operation = [[AFDownloadRequestOperation alloc] initWithRequest:mutableRequest targetPath:desPath shouldResume:YES];
+        [operationArray replaceObjectAtIndex:num withObject:operation];
+
+        //AFDownloadRequestOperation *downOperation = [operationArray objectAtIndex:num];
+        [[NSOperationQueue mainQueue] addOperation:operation];
         [button setTitle:@"暂停" forState:UIControlStateNormal];
-        //NSLog(@"tempPath = %@",downOperation.tempPath);
-        NSString *path = downOperation.tempPath;
+        NSString *path = operation.tempPath;
         myFileCell *cell = [[self.tableView visibleCells] objectAtIndex:num];
-        [downOperation setProgressiveDownloadProgressBlock:^(AFDownloadRequestOperation *operation, NSInteger bytesRead, long long totalBytesRead, long long totalBytesExpected, long long totalBytesReadForFile, long long totalBytesExpectedToReadForFile) {
+        [operation setProgressiveDownloadProgressBlock:^(AFDownloadRequestOperation *operation, NSInteger bytesRead, long long totalBytesRead, long long totalBytesExpected, long long totalBytesReadForFile, long long totalBytesExpectedToReadForFile) {
             //主线程更新UI
             dispatch_async(dispatch_get_main_queue(), ^{
                 cell.progressView.progress = totalBytesReadForFile/(float)totalBytesExpectedToReadForFile;
             });
         }];
-        [downOperation setCompletionBlock:^{
+        [operation setCompletionBlock:^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 [button setTitle:@"打开" forState:UIControlStateNormal];
                 NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -228,20 +236,22 @@
     BOOL removeFlag = [fileManager removeItemAtPath:desPath error:nil];
    
     myFileCell *cell = [[self.tableView visibleCells] objectAtIndex:button.tag];
-
+    [cell.actionButton setTitle:@"下载" forState:UIControlStateNormal];
     if (removeFlag) {
         cell.progressView.progress = 0.0;
+        [cell.actionButton setTitle:@"下载" forState:UIControlStateNormal];
+
     }
-    
+        
 }
 
 #pragma mark - 读文件操作
 -(void)myFileViewLoadTxt:(NSData *)txtData with:(NSString *)filename
 {
     ReadViewController *readView = [[ReadViewController alloc] init];
-    [readView.fileWebView reload];
-    [readView.fileWebView loadData:txtData MIMEType:@"text/txt" textEncodingName:@"GBK" baseURL:nil];
-    NSLog(@"%@",txtData);
+//    [readView.fileWebView reload];
+//    [readView.fileWebView loadData:txtData MIMEType:@"text/txt" textEncodingName:@"GBK" baseURL:nil];
+//    NSLog(@"%@",txtData);
     [self presentViewController:readView animated:YES completion:^{
         [readView.fileWebView reload];
         [readView.fileWebView loadData:txtData MIMEType:@"text/txt" textEncodingName:@"GBK" baseURL:nil];
@@ -252,10 +262,12 @@
 
 -(void)myfileViewloadOther:(NSURL *)url with:(NSString *)filename
 {
-    [myReadView.fileWebView reload];
-    [myReadView.fileWebView loadRequest:[NSURLRequest requestWithURL:url]];
-    //[myReadView.navBarItem setTitle:filename];
-    [self.navigationItem setTitle:filename];
+    ReadViewController *readView = [[ReadViewController alloc] init];
+    [self presentViewController:readView animated:YES completion:^{
+        [readView.fileWebView loadRequest:[NSURLRequest requestWithURL:url]];
+        [readView.fileWebView reload];
+    }];
+    [readView.navigationItem setTitle:filename];
 }
 
 #pragma mark - 文件操作

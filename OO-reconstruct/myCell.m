@@ -16,7 +16,7 @@
         // Initialization code
         _textlabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, 270, 40)];
         _textlabel.font=[UIFont fontWithName:@"Arial" size:14.0];
-        _image = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 30, 30)];
+        _image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 40, 40)];
         [self.contentView addSubview:_textlabel];
         [self.contentView addSubview:_image];
 
